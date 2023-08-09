@@ -6,7 +6,7 @@ import Layout from "../../components/Layout";
 const SuratPages = () => {
   const { id } = useParams();
   const [alsurat, setAlsurat] = useState();
-
+  const parser = new DOMParser();
   useEffect(() => {
     const SuratGetNomor = async () => {
       const req = await SurahAlQuran(id);
@@ -25,16 +25,24 @@ const SuratPages = () => {
               key={Value?.id}
             >
               <div>
-                <div className="max-w-full py-8 m-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 bg-gray-200">
-                  <div className="mx-8" style={{ marginLeft: "end" }}>
-                    {Value?.ar}
+                <div className="max-w-full py-8 m-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 bg-gray-100">
+                  <div className="mx-8 me-8" style={{ textAlign: "right" }}>
+                    <p className="font-semibold text-indigo-900">{Value?.ar}</p>
                   </div>
                   <br />
-                  <div className="mx-8">{Value.tr}</div>
+                  <div className="mx-8" style={{ textAlign: "left" }}>
+                    <p
+                      className="font-semibold text-emerald-800"
+                      dangerouslySetInnerHTML={{ __html: Value?.tr }}
+                    ></p>
+                  </div>
+                  <br />
+                  <div className="mx-8" style={{ textAlign: "left" }}>
+                    <p className="text-teal-700 font-sans md:font-serif">
+                      {index + 1} Artinya : {Value.idn}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div className="mx-8">
-                {index + 1} Artinya : {Value.idn}
               </div>
             </div>
           );
